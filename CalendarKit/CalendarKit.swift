@@ -10,9 +10,8 @@ import UIKit
 import Foundation
 
 // MARK: - CalendarKit -
-
-class CalendarKit: NSObject {
-
+class CalendarKit {
+    
 }
 
 
@@ -46,7 +45,7 @@ struct DayModel: CustomDebugStringConvertible {
     }
 }
 
-// MARK: - Extension -
+// MARK: - CalendarKit Extension -
 
 /// 自定义格里高利历（或称公历）和农历
 /// - Kit计算过程中只使用一下两个历法。公历为主要计算历法，农历是用来计算农历相关的日期与节日
@@ -97,6 +96,8 @@ extension Calendar {
 extension Date {
     
     /// 获取当前日所在月的天数
+    ///
+    /// - Returns: 当前月天数
     func daysInMonth() -> Int {
         guard let di = Calendar.ckGregorian.dateInterval(of: .month, for: self) else {
             return 0
@@ -105,16 +106,24 @@ extension Date {
     }
     
     /// 获取距离当前周数的日期
+    ///
+    /// - Parameter: interval 周数间隔
+    /// - Returns: 日期
     func dayByInterval(weeks interval: Double) -> Date {
         return self.dayByInterval(days: interval * 7)
     }
     
     /// 获取距离当前天数的日期
+    ///
+    /// - Parameter: interval 天数间隔
+    /// - Returns: 日期
     func dayByInterval(days interval: Double) -> Date {
         return self.addingTimeInterval(TimeInterval(Calendar.dayInterval * interval))
     }
     
     /// 获取当前日所在月的 每一天的数据
+    ///
+    /// - Returns: 当月的每一天的数据
     func modelInMonth() -> [DayModel] {
         // di.start 本月1号0点 di.end下月1号0点
         guard let di = Calendar.ckGregorian.dateInterval(of: .month, for: self),
@@ -153,16 +162,45 @@ extension Date {
     
     private static let _ckFromatter = DateFormatter()
     /// Date to String
+    ///
+    /// - Parameters:
+    ///   - date: 日期
+    ///   - format: 格式 (yyyy-MM-dd)
+    ///   - timezome: 时区 (TimeZone.current)
+    /// - Returns: 对应字符串
     func string(from date: Date, format: String = "yyyy-MM-dd", timezome: TimeZone = TimeZone.current) -> String{
         Date._ckFromatter.dateFormat = format
         Date._ckFromatter.timeZone = timezome
         return Date._ckFromatter.string(from: date)
     }
     /// String to Date
+    ///
+    /// - Parameters:
+    ///   - string: 字符串
+    ///   - format: 格式 (yyyy-MM-dd)
+    ///   - timezome: 时区 (TimeZone.current)
+    /// - Returns: 对应日期
     func date(from string: String, format: String = "yyyy-MM-dd", timezome: TimeZone = TimeZone.current) -> Date? {
         Date._ckFromatter.dateFormat = format
         Date._ckFromatter.timeZone = timezome
         return Date._ckFromatter.date(from: string)
+    }
+    
+    
+    
+    static let weekdayNames = [Bundle.ckLocalizeString(key: "Day1") ?? "Sun",
+                               Bundle.ckLocalizeString(key: "Day2") ?? "Mon",
+                               Bundle.ckLocalizeString(key: "Day3") ?? "Tue",
+                               Bundle.ckLocalizeString(key: "Day4") ?? "Wed",
+                               Bundle.ckLocalizeString(key: "Day5") ?? "Thu",
+                               Bundle.ckLocalizeString(key: "Day6") ?? "Fri",
+                               Bundle.ckLocalizeString(key: "Day7") ?? "Sat"]
+    /// 周名称
+    func weekdayName() -> String {
+        guard let r = Calendar.ckGregorian.ordinality(of: .day, in: .weekOfMonth, for: self) else {
+            return "Day"
+        }
+        return Date.weekdayNames[r-1]
     }
 
     

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E31808791E7FE91A0077E88C /* CalendarKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31808781E7FE91A0077E88C /* CalendarKit.swift */; };
+		E318087D1E800C550077E88C /* CKExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E318087C1E800C550077E88C /* CKExtensions.swift */; };
+		E31808861E801CAC0077E88C /* CalendarKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E31808851E801CAC0077E88C /* CalendarKit.bundle */; };
 		E37464C81E7FA9B700D2316A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37464C71E7FA9B700D2316A /* AppDelegate.swift */; };
 		E37464CA1E7FA9B700D2316A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37464C91E7FA9B700D2316A /* ViewController.swift */; };
 		E37464CD1E7FA9B700D2316A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E37464CB1E7FA9B700D2316A /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		E31808781E7FE91A0077E88C /* CalendarKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarKit.swift; sourceTree = "<group>"; };
+		E318087C1E800C550077E88C /* CKExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKExtensions.swift; sourceTree = "<group>"; };
+		E31808851E801CAC0077E88C /* CalendarKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CalendarKit.bundle; sourceTree = "<group>"; };
 		E37464C41E7FA9B700D2316A /* demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E37464C71E7FA9B700D2316A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E37464C91E7FA9B700D2316A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +45,8 @@
 			isa = PBXGroup;
 			children = (
 				E31808781E7FE91A0077E88C /* CalendarKit.swift */,
+				E318087C1E800C550077E88C /* CKExtensions.swift */,
+				E31808851E801CAC0077E88C /* CalendarKit.bundle */,
 			);
 			path = CalendarKit;
 			sourceTree = "<group>";
@@ -134,6 +140,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E31808861E801CAC0077E88C /* CalendarKit.bundle in Resources */,
 				E37464D21E7FA9B700D2316A /* LaunchScreen.storyboard in Resources */,
 				E37464CF1E7FA9B700D2316A /* Assets.xcassets in Resources */,
 				E37464CD1E7FA9B700D2316A /* Main.storyboard in Resources */,
@@ -150,6 +157,7 @@
 				E37464CA1E7FA9B700D2316A /* ViewController.swift in Sources */,
 				E37464C81E7FA9B700D2316A /* AppDelegate.swift in Sources */,
 				E31808791E7FE91A0077E88C /* CalendarKit.swift in Sources */,
+				E318087D1E800C550077E88C /* CKExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

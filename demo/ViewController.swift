@@ -13,6 +13,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        
+        for i in 0 ..< 7 {
+            print(Date().dayByInterval(days: Double(i)).weekdayName())
+        }
+        
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
