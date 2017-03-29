@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import EventKit
+
+
 
 class ViewController: UIViewController {
 
@@ -15,11 +18,12 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         
+        Calendar.ckFirstWeekday = .sun
         
-        for i in 0 ..< 7 {
-            print(Date().dayByInterval(days: Double(i)).weekdayName())
-        }
-        
+//        for i in 0 ..< 60 {
+//            print(Date().dayByInterval(months: i).modelInMonth())
+//            print("______")
+//        }
         
         
         
