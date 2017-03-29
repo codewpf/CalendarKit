@@ -149,7 +149,7 @@ struct CKDayModel: CustomDebugStringConvertible {
             let cDay = self.chineseComponents?.day else {
                 return "type = \(self.type)"
         }
-        return "type = \(self.type), components = \(year)-\(month)-\(day), chinese = \(cYear)-\(cMonth)-\(cDay), day= \(self.chineseDay!.year)\(self.chineseDay!.month)\(self.chineseDay!.day) weedayName = \(self.weekdayName)\n"
+        return "type = \(self.type), components = \(year)-\(month)-\(day), chinese = \(cYear)-\(cMonth)-\(cDay), day = \(self.chineseDay!.year)\(self.chineseDay!.month)\(self.chineseDay!.day) weedayName = \(self.weekdayName)\n"
     }
 }
 
@@ -189,16 +189,7 @@ extension Calendar {
                                   Bundle.ckLocalizeString(key: "Day5") ?? "Thu",
                                   Bundle.ckLocalizeString(key: "Day6") ?? "Fri",
                                   Bundle.ckLocalizeString(key: "Day7") ?? "Sat"]
-    private static var ckWeekdayNamesKey: UInt8 = 0
-    fileprivate static var ckWeekdayNames: [String]? {
-        get {
-            return objc_getAssociatedObject(self, &Calendar.ckWeekdayNamesKey) as? [String]
-        }
-        set {
-            objc_setAssociatedObject(self, &Calendar.ckWeekdayNamesKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
-        }
-    }
-    
+    static var ckWeekdayNames: [String] = []
     
     /// cCalendarKit 第一个工作日
     static var ckFirstWeekday: FirstWeekDayType {
@@ -219,8 +210,7 @@ extension Calendar {
                 }
             }
             
-            Calendar.ckWeekdayNames = names
-
+            self.ckWeekdayNames = names
         }
     }
     
@@ -288,8 +278,10 @@ extension Date {
         }
         
         var result: [CKDayModel] = []
-        // 计算当前月第一周包含上月的数据，如果第一天是周一就不再计算
-        if startInWeek > 2 {
+        // 计算当前月第一周包含上月的数据，如果第一天是FirstWeekday就不再计算
+        
+        print(startInWeek)
+        if startInWeek >= 2 {
             for i in 1 ... startInWeek - 1 {
                 let model: CKDayModel = CKDayModel(type: .pre, date: di.start.dayByInterval(days: Double(-1 * i)))
                 result.insert(model, at: 0)
@@ -302,7 +294,7 @@ extension Date {
             result.append(model)
         }
         
-        // 计算当前月最后一周包含下月的数据，如果是下个月第一天是周一就不算在最后一周。
+        // 计算当前月最后一周包含下月的数据，如果是下个月第一天是FirstWeekday就不算在最后一周。
         if endInWeek > 1 {
             for i in 0 ..< 7 + 1 - endInWeek {
                 let model: CKDayModel = CKDayModel(type: .sub, date: di.end.dayByInterval(days: Double(i)))
@@ -315,14 +307,14 @@ extension Date {
     /// 周名称
     func weekdayName() -> String {
         guard let index = Calendar.ckGregorian.ordinality(of: .day, in: .weekOfMonth, for: self) else {
-            return "错误周名称"
+            return "error name"
         }
         
-        guard let names = Calendar.ckWeekdayNames else {
+        guard Calendar.ckWeekdayNames.count == 7  else {
             return "\(index)"
         }
 
-        return names[index]
+        return Calendar.ckWeekdayNames[index-1]
     }
 
     fileprivate static let _ckFromatter = DateFormatter()

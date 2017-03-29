@@ -19,11 +19,33 @@ class ViewController: UIViewController {
         
         
         Calendar.ckFirstWeekday = .sun
+        print(Date().dayByInterval(months: 0).modelInMonth())
+        print("------")
         
-//        for i in 0 ..< 60 {
-//            print(Date().dayByInterval(months: i).modelInMonth())
-//            print("______")
-//        }
+        Calendar.ckFirstWeekday = .mon
+        print(Date().dayByInterval(months: 0).modelInMonth())
+        print("------")
+
+        Calendar.ckFirstWeekday = .tue
+        print(Date().dayByInterval(months: 0).modelInMonth())
+        print("------")
+
+        Calendar.ckFirstWeekday = .wed
+        print(Date().dayByInterval(months: 0).modelInMonth())
+        print("------")
+
+        Calendar.ckFirstWeekday = .thr
+        print(Date().dayByInterval(months: 0).modelInMonth())
+        print("------")
+
+        Calendar.ckFirstWeekday = .fri
+        print(Date().dayByInterval(months: 0).modelInMonth())
+        print("------")
+
+        Calendar.ckFirstWeekday = .sat
+        print(Date().dayByInterval(months: 0).modelInMonth())
+        print("------")
+
         
         
         
